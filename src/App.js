@@ -1,23 +1,40 @@
-import logo from './logo.svg';
-import './App.css';
+import Header from './components/Header'
+import AddTheAccount from './components/AddTheAccount';
+import AccountCard from './components/AccountCard';
+import {useState} from 'react'
+import PersonDetails from './components/PersonDetails'
+import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
+
 
 function App() {
+
+  const [jagah, setJagah] = useState([])
+
+  function addme(e){
+    console.log('inside addme start')
+    console.log(e)
+    setJagah([...jagah, e]);
+    console.log(jagah);
+    console.log('inside addme end')
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <Header/>
+    <AddTheAccount addme = {addme}/>
+    <AccountCard jagahe = {jagah}/>
+      {/* <Router>
+      <Header/>
+       <Switch>
+        <Route path = "/" component = {() => ( 
+          <AddTheAccount addme = {addme}/>
+        )} />
+        <Route path = "/" component = {() => ( 
+          <AccountCard jagahe = {jagah}/>
+        )} />
+      <Route path = "/personDetails" component = {PersonDetails} />
+      </Switch>
+      </Router> */}
     </div>
   );
 }
