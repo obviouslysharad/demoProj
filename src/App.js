@@ -8,33 +8,42 @@ import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 
 function App() {
 
-  const [jagah, setJagah] = useState([])
+  const [jagah, setJagah] = useState([{name: 'Sharad', size: '100',}])
+  const [state, setState] = useState({
+    name: "",
+    size: "",
+  });
 
   function addme(e){
+    e.preventDefault();
     console.log('inside addme start')
     console.log(e)
-    setJagah([...jagah, e]);
+    console.log(e.target[0].value, e.target[1].value);
+    setState({...state, name: e.target[0].value, size: e.target[1].value});
+    setJagah([...jagah, state]);
     console.log(jagah);
     console.log('inside addme end')
   }
 
   return (
     <div className="App">
-    <Header/>
-    <AddTheAccount addme = {addme}/>
-    <AccountCard jagahe = {jagah}/>
-      {/* <Router>
+      <Router>
       <Header/>
+      
        <Switch>
-        <Route path = "/" component = {() => ( 
-          <AddTheAccount addme = {addme}/>
+        <Route exact path = "/" component = {() => ( 
+          <AddTheAccount addme = {addme} jagahe = {jagah}/>
         )} />
-        <Route path = "/" component = {() => ( 
+        
+        
+        {/* <Route exact path = "/det" component = {() => ( 
           <AccountCard jagahe = {jagah}/>
-        )} />
+        )} /> */}
       <Route path = "/personDetails" component = {PersonDetails} />
       </Switch>
-      </Router> */}
+      {/* <AccountCard jagahe = {jagah}/> */}
+      </Router>
+      
     </div>
   );
 }

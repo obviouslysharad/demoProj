@@ -1,27 +1,23 @@
 import React from "react";
 import { Modal, Button, Form } from "react-bootstrap";
-import { useState, useEffect } from "react";
+import { useState, useEffect, Link } from "react";
 
 function AddingTheAccount(props) {
-  var [state, setState] = useState({
-    name: "",
-    size: "",
-  });
 
   const handleSubmit = (e) => {
+    e.preventDefault();
     console.log("handlesbumit");
-    console.log(e.target[0].value, e.target[1].value);
     // Prints the name and size on the console
-    setState({...state, name: e.target[0].value, size: e.target[1].value});
-    console.log(state);
+    console.log(e);
     //Here state is not getting updated. Still showing empty name and size
-    props.change(state);
+    props.change(e);
+    
   };
 
-  useEffect(() => {
-    console.log('inside useeffect')
-    console.log(state)
-  },[state])
+  // useEffect(() => {
+  //   console.log('inside useeffect')
+  //   console.log(state)
+  // },[state])
 
   if (props.accountInfo) {
     return (
@@ -31,8 +27,7 @@ function AddingTheAccount(props) {
             <Modal.Title>Add you account</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <Form onSubmit={(e) => handleSubmit(e)}
-              >
+            <Form onSubmit={(e) => handleSubmit(e)}>
               <Form.Group className="mb-3" controlId="name" name="name">
                 <Form.Label>Capital Name</Form.Label>
                 <Form.Control
@@ -47,11 +42,11 @@ function AddingTheAccount(props) {
                   placeholder="Enter Capital Size"
                 />
               </Form.Group>
-              <Form.Group>
-                <Button type="submit" variant="primary">
-                  Submit
-                </Button>
-              </Form.Group>
+                <Form.Group>
+                  <Button type="submit" variant="primary">
+                    Submit
+                  </Button>
+                </Form.Group>
             </Form>
           </Modal.Body>
           <Modal.Footer>
@@ -61,12 +56,14 @@ function AddingTheAccount(props) {
             >
               Close
             </Button>
-            <Button variant="primary">Submit</Button>
+            <Button variant
+            ="primary">Submit</Button>
           </Modal.Footer>
         </Modal>
       </div>
     );
   } else return <div></div>;
 }
+useState()
 
 export default AddingTheAccount;
